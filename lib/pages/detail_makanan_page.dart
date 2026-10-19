@@ -3,32 +3,21 @@ import 'package:fluttercoba/controller/detail_makanan_controller.dart';
 import 'package:get/get.dart';
 
 class DetailMakananPage extends StatelessWidget {
-  const DetailMakananPage({super.key});
+  DetailMakananPage({super.key});
+
+  // menyambungkan page dan controller
+  final controller = Get.put(DetailMakananController());
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DetailMakananController());
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-
-    final label = theme.textTheme.labelMedium?.copyWith(
-      color: scheme.primary,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 2,
-    );
-    final body = theme.textTheme.bodyLarge?.copyWith(height: 1.5);
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: scheme.primary,
-        foregroundColor: scheme.onPrimary,
+        backgroundColor: controller.scheme(context).primary,
+        foregroundColor: controller.scheme(context).onPrimary,
         title: Text(
           "Detail Makanan",
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: scheme.onPrimary,
-          ),
+          style: controller.appBarTitleStyle(context),
         ),
       ),
       body: Padding(
@@ -46,11 +35,11 @@ class DetailMakananPage extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) => Container(
                   height: 240,
                   width: double.infinity,
-                  color: scheme.primaryContainer,
+                  color: controller.scheme(context).primaryContainer,
                   child: Icon(
                     Icons.restaurant_rounded,
                     size: 56,
-                    color: scheme.primary,
+                    color: controller.scheme(context).primary,
                   ),
                 ),
               ),
@@ -59,7 +48,7 @@ class DetailMakananPage extends StatelessWidget {
             Text(
               controller.makanan.namaMakanan,
               textAlign: TextAlign.center,
-              style: theme.textTheme.headlineMedium?.copyWith(
+              style: controller.textTheme(context).headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -67,8 +56,8 @@ class DetailMakananPage extends StatelessWidget {
             Text(
               "Rp ${controller.makanan.harga}",
               textAlign: TextAlign.center,
-              style: theme.textTheme.titleLarge?.copyWith(
-                color: scheme.primary,
+              style: controller.textTheme(context).titleLarge?.copyWith(
+                color: controller.scheme(context).primary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -76,25 +65,33 @@ class DetailMakananPage extends StatelessWidget {
             Text(
               "★ ${controller.makanan.rating.runes.length}/5",
               textAlign: TextAlign.center,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
+              style: controller.textTheme(context).bodyMedium?.copyWith(
+                color: controller.scheme(context).onSurfaceVariant,
               ),
             ),
             const SizedBox(height: 28),
-            Text("REVIEW", textAlign: TextAlign.center, style: label),
+            Text(
+              "REVIEW",
+              textAlign: TextAlign.center,
+              style: controller.labelStyle(context),
+            ),
             const SizedBox(height: 6),
             Text(
               controller.makanan.review,
               textAlign: TextAlign.center,
-              style: body,
+              style: controller.bodyStyle(context),
             ),
             const SizedBox(height: 24),
-            Text("DESKRIPSI", textAlign: TextAlign.center, style: label),
+            Text(
+              "DESKRIPSI",
+              textAlign: TextAlign.center,
+              style: controller.labelStyle(context),
+            ),
             const SizedBox(height: 6),
             Text(
               controller.makanan.deskripsi,
               textAlign: TextAlign.center,
-              style: body,
+              style: controller.bodyStyle(context),
             ),
           ],
         ),
