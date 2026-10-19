@@ -1,59 +1,51 @@
-import 'package:fluttercoba/controller/page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ConfirmRegistration extends StatelessWidget {
-  ConfirmRegistration({super.key});
-
-  final controller = Get.put(ConfirmRegistrationController());
+  const ConfirmRegistration({super.key});
 
   @override
+  @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> args = Get.arguments ?? {};
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Konfirmasi"), centerTitle: true),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Card(
-            margin: const EdgeInsets.all(24),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    size: 64,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Data Pendaftaran",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  ListTile(
-                    leading: const Icon(Icons.person),
-                    title: const Text("Username"),
-                    subtitle: Text(controller.username),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.badge),
-                    title: const Text("Nama Lengkap"),
-                    subtitle: Text(controller.namaLengkap),
-                  ),
-                  const SizedBox(height: 16),
-                  FilledButton(
-                    style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    onPressed: () => Get.back(),
+      appBar: AppBar(title: const Text("Confirm Page")),
+      body: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Nama: ${args['nama_lengkap'] ?? '-'}",
+                    style: const TextStyle(fontSize: 18)),
+                const SizedBox(height: 10),
+                Text("Email: ${args['email'] ?? '-'}",
+                    style: const TextStyle(fontSize: 18)),
+                const SizedBox(height: 10),
+                Text("Gender: ${args['jenis_kelamin'] ?? '-'}",
+                    style: const TextStyle(fontSize: 18)),
+                const SizedBox(height: 10),
+                Text("No WA: ${args['no_wa'] ?? '-'}",
+                    style: const TextStyle(fontSize: 18)),
+                const SizedBox(height: 30),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
                     child: const Text("OK"),
                   ),
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),

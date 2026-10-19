@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'src/CustomTextField.dart';
-import 'src/CustomText.dart';
-import 'src/CustomButton.dart';
+import 'package:fluttercoba/src/CustomTextField.dart';
+import 'package:fluttercoba/src/CustomButton.dart';
+import 'package:fluttercoba/src/CustomText.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,17 +31,16 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Container(
             margin: EdgeInsets.all(10),
-            child: TextField(
-              controller: txtUsername,
-              decoration: InputDecoration(hint: Text("input username")),
+            child: CustomTextfield(
+              myHint: "input username",
+              txtController: txtUsername,
             ),
           ),
           Container(
             margin: EdgeInsets.all(10),
-            child: TextField(
-              controller: txtPassword,
-              obscureText: true,
-              decoration: InputDecoration(hint: Text("input password")),
+            child: CustomTextfield(
+              myHint: "input password",
+              txtController: txtPassword,
             ),
           ),
 

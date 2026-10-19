@@ -1,102 +1,125 @@
+import 'package:fluttercoba/src/CustomTextField.dart';
+import 'package:fluttercoba/controller/calculator_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Calculator extends StatelessWidget {
-  const Calculator({super.key});
+class CalculatorPage extends StatelessWidget {
+  CalculatorPage({super.key});
+
+  // menyambungkan page dan controller
+  final controller = Get.put(KalkulatorController());
+
+
+  final txtangka1 = TextEditingController();
+  final txtangka2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Layar tampilan
-            Expanded(
-              flex: 2,
-              child: Container(
-                width: double.infinity,
-                alignment: Alignment.bottomRight,
+      backgroundColor: const Color(0xFFF3F0FF),
+      appBar: AppBar(
+        title: const Text(
+          'My Kalkulator',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.amberAccent,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: ConstrainedBox(
+
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: Card(
+              elevation: 6,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
                 padding: const EdgeInsets.all(24),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      '',
-                      style: TextStyle(color: Colors.grey, fontSize: 20),
-                    ),
-                    Text(
-                      '',
+                    const Icon(Icons.calculate,
+                        size: 64, color: Colors.amber),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Penjumlahan',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 56,
-                        fontWeight: FontWeight.w300,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+
+                    CustomTextfield(
+                      myHint: 'input angka 1',
+                      txtController: txtangka1,
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextfield(
+                      myHint: 'input angka 2',
+                      txtController: txtangka2,
+                    ),
+                    const SizedBox(height: 24),
+
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.add),
+                      label: const Text('Tambah'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.pinkAccent,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        textStyle: const TextStyle(fontSize: 18),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: () {
+                        // tryParse: kalau kosong/bukan angka, dianggap 0
+                        final a = double.tryParse(txtangka1.text) ?? 0;
+                        final b = double.tryParse(txtangka2.text) ?? 0;
+                        controller.tambah(a, b);
+                      },
+                    ),
+                    const SizedBox(height: 24),
+
+
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent.shade100,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.redAccent.shade200),
+                      ),
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Hasil',
+                            style: TextStyle(color: Colors.red, fontSize: 14),
+                          ),
+                          const SizedBox(height: 4),
+                          // Obx = otomatis update kalau hasilHitung berubah
+                          Obx(
+                                () => Text(
+                              controller.hasilHitung.value.toString(),
+                              style: const TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.amber,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            // Tombol-tombol
-            Expanded(
-              flex: 4,
-              child: GridView.count(
-                crossAxisCount: 4,
-                padding: const EdgeInsets.all(12),
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                children: [
-                  _buildButton('C', bg: Colors.grey.shade400, fg: Colors.black),
-                  _buildButton('±', bg: Colors.grey.shade400, fg: Colors.black),
-                  _buildButton('%', bg: Colors.grey.shade400, fg: Colors.black),
-                  _buildButton('÷', bg: Colors.orange),
-
-                  _buildButton('7'),
-                  _buildButton('8'),
-                  _buildButton('9'),
-                  _buildButton('×', bg: Colors.orange),
-
-                  _buildButton('4'),
-                  _buildButton('5'),
-                  _buildButton('6'),
-                  _buildButton('−', bg: Colors.orange),
-
-                  _buildButton('1'),
-                  _buildButton('2'),
-                  _buildButton('3'),
-                  _buildButton('+', bg: Colors.orange),
-
-                  _buildButton('0'),
-                  _buildButton('.'),
-                  _buildButton('⌫', bg: Colors.grey.shade800),
-                  _buildButton('=', bg: Colors.orange),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildButton(
-      String text, {
-        Color bg = const Color(0xFF333333),
-        Color fg = Colors.white,
-      }) {
-    return Material(
-      color: bg,
-      shape: const CircleBorder(),
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        onTap: () {}, // belum ada fungsi
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              fontSize: 24,
-              color: fg,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ),
