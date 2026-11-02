@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         appBarTheme: const AppBarTheme(scrolledUnderElevation: 0),
       ),
-      initialRoute: Routes.list_makanan,
+      initialRoute: Routes.login,
       getPages: Routes.myPages,
     );
   }
