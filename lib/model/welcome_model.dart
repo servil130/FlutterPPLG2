@@ -32,7 +32,7 @@ class Welcome {
       };
 }
 
-// Alias agar kompatibel jika menggunakan LoginModel
+
 typedef LoginModel = Welcome;
 LoginModel loginModelFromJson(String str) => welcomeFromJson(str);
 String loginModelToJson(LoginModel data) => welcomeToJson(data);

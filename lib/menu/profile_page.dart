@@ -7,7 +7,6 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil username dari LoginController jika ada
     final loginController = Get.isRegistered<LoginController>()
         ? Get.find<LoginController>()
         : null;
@@ -51,16 +50,16 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // ---- Profile Header ----
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Avatar + Stats Row
+
                 Row(
                   children: [
-                    // Avatar dengan Instagram Story Gradient Ring
+
                     Stack(
                       alignment: Alignment.bottomRight,
                       children: [
@@ -114,7 +113,7 @@ class ProfilePage extends StatelessWidget {
 
                     const SizedBox(width: 24),
 
-                    // Stats (Posts, Followers, Following)
+
                     const Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -130,7 +129,7 @@ class ProfilePage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // Name & Bio
+
                 Text(
                   username.capitalizeFirst ?? username,
                   style: const TextStyle(
@@ -163,7 +162,7 @@ class ProfilePage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Action Buttons (Edit Profile, Share Profile, Add Person)
+
                 Row(
                   children: [
                     Expanded(
@@ -189,7 +188,7 @@ class ProfilePage extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Story Highlights
+
                 const SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -206,12 +205,12 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          // ---- Grid / Reels / Tagged Tabs ----
+
           const Divider(height: 1, color: Color(0xFFE0E0E0)),
           _GridReelTabBar(),
           const Divider(height: 1, color: Color(0xFFE0E0E0)),
 
-          // ---- Posts Grid ----
+
           const Expanded(
             child: _PostsGrid(),
           ),
@@ -221,9 +220,7 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// ===========================================================
-// Sub Widgets
-// ===========================================================
+
 
 class _StatColumn extends StatelessWidget {
   final String label;

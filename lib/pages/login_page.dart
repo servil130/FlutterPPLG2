@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 40),
 
-                // Instagram Logo
+
                 const Text(
                   'Instagram',
                   style: TextStyle(
@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 32),
 
-                // Username Field
+
                 _IgTextField(
                   hint: 'Phone number, username, or email',
                   controller: controller.txtUsername,
@@ -43,12 +43,12 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // Password Field
+
                 _IgPasswordField(controller: controller.txtPassword),
 
                 const SizedBox(height: 6),
 
-                // Forgot Password
+
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // Log In Button
+
                 Obx(
                   () => SizedBox(
                     width: double.infinity,
@@ -128,7 +128,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // Log in with Facebook
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -147,12 +147,12 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 40),
 
-                // Divider
+
                 const Divider(color: Color(0xFFDBDBDB)),
 
                 const SizedBox(height: 14),
 
-                // Don't have account
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
