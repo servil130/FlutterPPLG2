@@ -15,8 +15,17 @@ class MyApp extends StatelessWidget {
       title: "Belajar Flutter GetX",
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        appBarTheme: const AppBarTheme(scrolledUnderElevation: 0),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.white,
+          brightness: Brightness.light,
+        ),
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          scrolledUnderElevation: 0,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+        ),
+        fontFamily: 'Roboto',
       ),
       initialRoute: Routes.login,
       getPages: Routes.myPages,

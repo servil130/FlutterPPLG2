@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:fluttercoba/model/login_model.dart';
 import 'package:fluttercoba/routes.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +9,9 @@ class LoginController extends GetxController {
   final txtPassword = TextEditingController();
 
   var isLoading = false.obs;
+
+  // 1. Deklarasi Rxn<LoginModel>
+  var loginModel = Rxn<LoginModel>();
 
   Future<void> login() async {
     if (txtUsername.text.isEmpty || txtPassword.text.isEmpty) {
@@ -26,13 +28,16 @@ class LoginController extends GetxController {
       });
       isLoading.value = false;
 
+      // 2. Di dalam if status code 200
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['status'] == true) {
-          Get.snackbar("berhasil", data['message'].toString());
+        loginModel.value = loginModelFromJson(response.body);
+
+        // 3. Menggunakan loginModel.value?.status
+        if (loginModel.value?.status == true) {
+          Get.snackbar("berhasil", loginModel.value?.message ?? "");
           Get.offNamed(Routes.main_menu);
         } else {
-          Get.snackbar("gagal", data['message'].toString());
+          Get.snackbar("gagal", loginModel.value?.message ?? "");
         }
       } else {
         Get.snackbar("gagal", "cek internet connection");

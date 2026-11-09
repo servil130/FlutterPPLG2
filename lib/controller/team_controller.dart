@@ -21,7 +21,7 @@ class TeamController extends GetxController {
       errorMsg.value = '';
 
       final url = Uri.parse(
-        "https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League",
+        "https://www.thesportsdb.com/api/v1/json/123/search_all_teams.php?l=English_Premier_League",
       );
       final response = await http.get(url);
 
